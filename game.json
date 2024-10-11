@@ -723,7 +723,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": true,
-        "zoomFactor": 0.6685564688428561,
+        "zoomFactor": 0.8866666465759274,
         "windowMask": false
       },
       "objectsGroups": [
@@ -777,6 +777,16 @@
           "name": "PitchScaling",
           "type": "number",
           "value": 1
+        },
+        {
+          "name": "GameOverSwitch",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "gameWin",
+          "type": "string",
+          "value": ""
         }
       ],
       "instances": [
@@ -785,7 +795,7 @@
           "customSize": true,
           "height": 736,
           "layer": "Background",
-          "locked": false,
+          "locked": true,
           "name": "Background",
           "persistentUuid": "824bc678-324f-48ff-aca1-99016ce82937",
           "width": 1280,
@@ -815,14 +825,14 @@
         {
           "angle": 0,
           "customSize": true,
-          "height": 190,
+          "height": 222,
           "layer": "UI",
-          "locked": false,
+          "locked": true,
           "name": "Score",
           "persistentUuid": "4073922b-fd39-487b-b30b-e9b39cb0058a",
-          "width": 1280,
+          "width": 1312,
           "x": 0,
-          "y": 0,
+          "y": -30,
           "zOrder": 9,
           "numberProperties": [],
           "stringProperties": [],
@@ -869,8 +879,8 @@
           "name": "Selector",
           "persistentUuid": "cdf425cc-4af4-4f86-aaef-c0b8f3585f31",
           "width": 32,
-          "x": 992,
-          "y": 256,
+          "x": 1920,
+          "y": 576,
           "zOrder": 5,
           "numberProperties": [],
           "stringProperties": [],
@@ -4609,9 +4619,9 @@
           "variables": [],
           "effects": [],
           "behaviors": [],
-          "string": "Score: NULL",
+          "string": "1.000.000.000",
           "font": "",
-          "characterSize": 42,
+          "characterSize": 200,
           "color": {
             "b": 255,
             "g": 255,
@@ -4621,62 +4631,315 @@
       ],
       "events": [
         {
+          "colorB": 228,
+          "colorG": 176,
+          "colorR": 74,
+          "creationTime": 0,
           "disabled": false,
           "folded": false,
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [
-            {
-              "type": {
-                "inverted": false,
-                "value": "DepartScene"
-              },
-              "parameters": [
-                ""
-              ],
-              "subInstructions": []
-            }
-          ],
-          "actions": [
-            {
-              "type": {
-                "inverted": false,
-                "value": "ModVarScene"
-              },
-              "parameters": [
-                "ScoreBil",
-                "=",
-                "1000000000"
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "CentreCamera"
-              },
-              "parameters": [
-                "",
-                "Selector",
-                "",
-                "",
-                ""
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "ChangePlan"
-              },
-              "parameters": [
-                "Selector",
-                "=",
-                "1000"
-              ],
-              "subInstructions": []
-            }
-          ],
+          "name": "Status Update",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
           "events": [
+            {
+              "disabled": false,
+              "folded": true,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "DepartScene"
+                  },
+                  "parameters": [
+                    ""
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SetSceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "GameOverSwitch",
+                    ""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SetSceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "gameWin",
+                    "False"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "TopDownMovementBehavior::IgnoreDefaultControls"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "TopDownMovement",
+                    "no"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "ModVarScene"
+                  },
+                  "parameters": [
+                    "ScoreBil",
+                    "=",
+                    "1000000000"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "CentreCamera"
+                  },
+                  "parameters": [
+                    "",
+                    "Selector",
+                    "",
+                    "",
+                    ""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "ChangePlan"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "=",
+                    "1000"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "ChangePlan"
+                  },
+                  "parameters": [
+                    "Background",
+                    "=",
+                    "0"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SmoothCamera::SmoothCamera::SetLeftwardSpeedMax"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "SmoothCamera",
+                    "9000",
+                    ""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SmoothCamera::SmoothCamera::SetRightwardSpeedMax"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "SmoothCamera",
+                    "9000",
+                    ""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SmoothCamera::SmoothCamera::SetUpwardSpeedMax"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "SmoothCamera",
+                    "9000",
+                    ""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SmoothCamera::SmoothCamera::SetDownwardSpeedMax"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "SmoothCamera",
+                    "9000",
+                    ""
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "events": [
+                {
+                  "disabled": false,
+                  "folded": false,
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "inverted": true,
+                        "value": "SystemInfo::IsMobile"
+                      },
+                      "parameters": [],
+                      "subInstructions": []
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "Delete"
+                      },
+                      "parameters": [
+                        "FlatLightJoystick",
+                        ""
+                      ],
+                      "subInstructions": []
+                    }
+                  ],
+                  "events": []
+                }
+              ]
+            },
+            {
+              "disabled": false,
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SeparateFromObjects"
+                  },
+                  "parameters": [
+                    "Entities",
+                    "GroundTile",
+                    ""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "TiledSpriteObject::Height"
+                  },
+                  "parameters": [
+                    "Background",
+                    "=",
+                    "CameraHeight(\"Background\",0 )"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "TiledSpriteObject::Width"
+                  },
+                  "parameters": [
+                    "Background",
+                    "=",
+                    "CameraWidth(\"Background\", 0)"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "MettreXY"
+                  },
+                  "parameters": [
+                    "Background",
+                    "=",
+                    "CameraX(\"Background\", 0) - CameraX(\"Background\", 0)",
+                    "=",
+                    "CameraY(\"Background\", 0) - CameraY(\"Background\", 0)"
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "events": [
+                {
+                  "disabled": false,
+                  "folded": false,
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "BuiltinCommonInstructions::And"
+                      },
+                      "parameters": [],
+                      "subInstructions": [
+                        {
+                          "type": {
+                            "inverted": false,
+                            "value": "SceneVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "GameOverSwitch",
+                            "False"
+                          ],
+                          "subInstructions": []
+                        },
+                        {
+                          "type": {
+                            "inverted": false,
+                            "value": "SceneVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "gameWin",
+                            "False"
+                          ],
+                          "subInstructions": []
+                        }
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "TextObject::String"
+                      },
+                      "parameters": [
+                        "Score",
+                        "=",
+                        "\nToString(Variable(ScoreBil))"
+                      ],
+                      "subInstructions": []
+                    }
+                  ],
+                  "events": []
+                }
+              ]
+            },
             {
               "disabled": false,
               "folded": false,
@@ -4684,8 +4947,20 @@
               "conditions": [
                 {
                   "type": {
-                    "inverted": true,
-                    "value": "SystemInfo::IsMobile"
+                    "inverted": false,
+                    "value": "VarScene"
+                  },
+                  "parameters": [
+                    "ScoreBil",
+                    "<=",
+                    "0"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "BuiltinCommonInstructions::Once"
                   },
                   "parameters": [],
                   "subInstructions": []
@@ -4695,111 +4970,19 @@
                 {
                   "type": {
                     "inverted": false,
-                    "value": "Delete"
+                    "value": "SetSceneVariableAsBoolean"
                   },
                   "parameters": [
-                    "FlatLightJoystick",
-                    ""
+                    "GameOverSwitch",
+                    "True"
                   ],
                   "subInstructions": []
                 }
               ],
               "events": []
             }
-          ]
-        },
-        {
-          "disabled": false,
-          "folded": false,
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [],
-          "actions": [
-            {
-              "type": {
-                "inverted": false,
-                "value": "TextObject::String"
-              },
-              "parameters": [
-                "Score",
-                "=",
-                "\nToString(Variable(ScoreBil))"
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "TiledSpriteObject::Width"
-              },
-              "parameters": [
-                "Background",
-                "=",
-                "CameraWidth()"
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "TiledSpriteObject::XOffset"
-              },
-              "parameters": [
-                "Background",
-                "=",
-                "CameraCenterX()"
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "TiledSpriteObject::YOffset"
-              },
-              "parameters": [
-                "Background",
-                "=",
-                "CameraCenterY()"
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "SeparateFromObjects"
-              },
-              "parameters": [
-                "Entities",
-                "GroundTile",
-                ""
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "TiledSpriteObject::Height"
-              },
-              "parameters": [
-                "Background",
-                "=",
-                "SceneWindowHeight()"
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "TiledSpriteObject::Width"
-              },
-              "parameters": [
-                "Background",
-                "=",
-                "SceneWindowWidth()"
-              ],
-              "subInstructions": []
-            }
           ],
-          "events": []
+          "parameters": []
         },
         {
           "colorB": 228,
@@ -4975,69 +5158,7 @@
           "creationTime": 0,
           "disabled": false,
           "folded": false,
-          "name": "Fail Game",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "events": [
-            {
-              "disabled": false,
-              "folded": false,
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "inverted": false,
-                    "value": "VarScene"
-                  },
-                  "parameters": [
-                    "ScoreBil",
-                    "<=",
-                    "0"
-                  ],
-                  "subInstructions": []
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "inverted": false,
-                    "value": "PlaySound"
-                  },
-                  "parameters": [
-                    "",
-                    "Death",
-                    "",
-                    "75",
-                    "0.8"
-                  ],
-                  "subInstructions": []
-                },
-                {
-                  "type": {
-                    "inverted": false,
-                    "value": "Scene"
-                  },
-                  "parameters": [
-                    "",
-                    "\"GameScene\"",
-                    ""
-                  ],
-                  "subInstructions": []
-                }
-              ],
-              "events": []
-            }
-          ],
-          "parameters": []
-        },
-        {
-          "colorB": 228,
-          "colorG": 176,
-          "colorR": 74,
-          "creationTime": 0,
-          "disabled": false,
-          "folded": false,
-          "name": "Win Game",
+          "name": "End Game",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
           "events": [
@@ -5063,12 +5184,258 @@
                 {
                   "type": {
                     "inverted": false,
+                    "value": "BuiltinCommonInstructions::Once"
+                  },
+                  "parameters": [],
+                  "subInstructions": []
+                }
+              ],
+              "actions": [],
+              "events": [
+                {
+                  "disabled": false,
+                  "folded": false,
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "VarScene"
+                      },
+                      "parameters": [
+                        "ScoreBil",
+                        ">=",
+                        "500000000"
+                      ],
+                      "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "BuiltinCommonInstructions::Once"
+                      },
+                      "parameters": [],
+                      "subInstructions": []
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "SetSceneVariableAsBoolean"
+                      },
+                      "parameters": [
+                        "GameOverSwitch",
+                        ""
+                      ],
+                      "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "SetSceneVariableAsBoolean"
+                      },
+                      "parameters": [
+                        "gameWin",
+                        "True"
+                      ],
+                      "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "PlaySound"
+                      },
+                      "parameters": [
+                        "",
+                        "WinGame",
+                        "",
+                        "50",
+                        "1"
+                      ],
+                      "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "ScoreBil",
+                        "=",
+                        "\"CONGRADURATION\""
+                      ],
+                      "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "TopDownMovementBehavior::MaxSpeed"
+                      },
+                      "parameters": [
+                        "Selector",
+                        "TopDownMovement",
+                        "=",
+                        "0"
+                      ],
+                      "subInstructions": []
+                    }
+                  ],
+                  "events": [
+                    {
+                      "disabled": false,
+                      "folded": false,
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "inverted": false,
+                            "value": "SceneVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "gameWin",
+                            "True"
+                          ],
+                          "subInstructions": []
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "disabled": false,
+                          "folded": false,
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "inverted": false,
+                                "value": "BuiltinCommonInstructions::Or"
+                              },
+                              "parameters": [],
+                              "subInstructions": [
+                                {
+                                  "type": {
+                                    "inverted": false,
+                                    "value": "KeyPressed"
+                                  },
+                                  "parameters": [
+                                    "",
+                                    "Return"
+                                  ],
+                                  "subInstructions": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": {
+                                "inverted": false,
+                                "value": "BuiltinCommonInstructions::Once"
+                              },
+                              "parameters": [],
+                              "subInstructions": []
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "inverted": false,
+                                "value": "Scene"
+                              },
+                              "parameters": [
+                                "",
+                                "\"GameScene\"",
+                                ""
+                              ],
+                              "subInstructions": []
+                            }
+                          ],
+                          "events": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "disabled": false,
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": false,
                     "value": "VarScene"
                   },
                   "parameters": [
                     "ScoreBil",
-                    ">=",
+                    "<",
                     "500000000"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "BuiltinCommonInstructions::Once"
+                  },
+                  "parameters": [],
+                  "subInstructions": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SetSceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "gameWin",
+                    "False"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SetSceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "GameOverSwitch",
+                    "True"
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "events": []
+            }
+          ],
+          "parameters": []
+        },
+        {
+          "colorB": 228,
+          "colorG": 176,
+          "colorR": 74,
+          "creationTime": 0,
+          "disabled": false,
+          "folded": false,
+          "name": "Fail Game",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "events": [
+            {
+              "disabled": false,
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "GameOverSwitch",
+                    "True"
                   ],
                   "subInstructions": []
                 },
@@ -5089,21 +5456,10 @@
                   },
                   "parameters": [
                     "",
-                    "WinGame",
+                    "Death",
                     "",
-                    "50",
-                    "1"
-                  ],
-                  "subInstructions": []
-                },
-                {
-                  "type": {
-                    "inverted": false,
-                    "value": "ResetTimer"
-                  },
-                  "parameters": [
-                    "",
-                    "\"SceneWait\""
+                    "75",
+                    "0.8"
                   ],
                   "subInstructions": []
                 },
@@ -5115,7 +5471,20 @@
                   "parameters": [
                     "ScoreBil",
                     "=",
-                    "\"CONGRADURATION\""
+                    "\"FISSION MAILED\""
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "TopDownMovementBehavior::MaxSpeed"
+                  },
+                  "parameters": [
+                    "Selector",
+                    "TopDownMovement",
+                    "=",
+                    "0"
                   ],
                   "subInstructions": []
                 }
@@ -5129,29 +5498,24 @@
                     {
                       "type": {
                         "inverted": false,
-                        "value": "CompareTimer"
+                        "value": "KeyPressed"
                       },
                       "parameters": [
                         "",
-                        "\"SceneWait\"",
-                        ">=",
-                        "3"
+                        "Return"
                       ],
+                      "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "BuiltinCommonInstructions::Once"
+                      },
+                      "parameters": [],
                       "subInstructions": []
                     }
                   ],
                   "actions": [
-                    {
-                      "type": {
-                        "inverted": false,
-                        "value": "RemoveTimer"
-                      },
-                      "parameters": [
-                        "",
-                        "\"SceneWait\""
-                      ],
-                      "subInstructions": []
-                    },
                     {
                       "type": {
                         "inverted": false,
@@ -5160,7 +5524,7 @@
                       "parameters": [
                         "",
                         "\"GameScene\"",
-                        "yes"
+                        ""
                       ],
                       "subInstructions": []
                     }
